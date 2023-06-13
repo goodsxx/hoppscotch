@@ -1,6 +1,3 @@
-# To make it easier to self-host, we have a preset docker compose config that also
-# has a container with a Postgres instance running.
-# You can tweak around this file to match your instances
 version: "3.7"
 
 services:
@@ -16,7 +13,7 @@ services:
     restart: always
     environment:
       # Edit the below line to match your PostgresDB URL if you have an outside DB (make sure to update the .env file as well)
-      - DATABASE_URL=postgresql://postgres:testpass@hoppscotch-db:5432/hoppscotch?connect_timeout=300
+      - DATABASE_URL=postgresql://postgres:justdoit.666@106.75.217.26:5432/hoppscotch?connect_timeout=300
       - PORT=3000
     volumes:
       - ./packages/hoppscotch-backend/:/usr/src/app
@@ -55,17 +52,5 @@ services:
       - hoppscotch-backend
     ports:
       - "3100:8080"
-
-  # The preset DB service, you can delete/comment the below lines if
-  # you are using an external postgres instance
-  # This will be exposed at port 5432
-  hoppscotch-db:
-    image: postgres
-    ports:
-      - "5432:5432"
-    environment:
-      # NOTE: Please UPDATE THIS PASSWORD!
-      POSTGRES_PASSWORD: testpass
-      POSTGRES_DB: hoppscotch
 
 
